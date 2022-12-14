@@ -86,7 +86,7 @@ class SceneManager:
         self._add_stats(cast)
         self._add_score(cast)
         self._add_ball(cast)
-        self._add_rackets(cast)
+        self._add_racket(cast)
         self._add_dialog(cast, ENTER_TO_START)
 
         self._add_initialize_script(script)
@@ -192,7 +192,7 @@ class SceneManager:
 
         stat_b = Stats()
         stat_b.set_name(PLAYER_B_NAME)
-        cast.add_entity(STATS_GROUP, stat_b)
+        cast.add_actor(STATS_GROUP, stat_b)
 
     def _add_racket(self, cast):
         cast.clear_actors(RACKET_GROUP)
@@ -209,7 +209,7 @@ class SceneManager:
         position_b = Point(CENTER_X + x, y)
         body_b = Body(position_b, size, velocity)
         racket_b = Racket(body_b, animation)
-        cast.add_actors(RACKET_GROUP, racket_b)
+        cast.add_actor(RACKET_GROUP, racket_b)
 
     # ----------------------------------------------------------------------------------------------
     # scripting methods
@@ -227,7 +227,7 @@ class SceneManager:
         script.add_action(OUTPUT, self.START_DRAWING_ACTION)
         script.add_action(OUTPUT, self.DRAW_HUD_ACTION)
         script.add_action(OUTPUT, self.DRAW_BALL_ACTION)
-        script.add_action(OUTPUT, self.DRAW_BRICKS_ACTION)
+        script.add_action(OUTPUT, self.DRAW_RACKET_ACTION)
         script.add_action(OUTPUT, self.DRAW_RACKET_ACTION)
         script.add_action(OUTPUT, self.DRAW_DIALOG_ACTION)
         script.add_action(OUTPUT, self.END_DRAWING_ACTION)
