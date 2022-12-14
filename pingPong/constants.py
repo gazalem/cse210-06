@@ -1,11 +1,12 @@
 from game.casting.color import Color
+from game.casting.point import Point
 
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 # GENERAL GAME CONSTANTS
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 
 # GAME
-GAME_NAME = "Batter"
+GAME_NAME = "Ping Pong"
 FRAME_RATE = 60
 
 # SCREEN
@@ -21,14 +22,17 @@ FIELD_LEFT = 0
 FIELD_RIGHT = SCREEN_WIDTH
 
 # FONT
-FONT_FILE = "batter/assets/fonts/zorque.otf"
+FONT_FILE = "pingPong/assets/fonts/zorque.otf"
 FONT_SMALL = 32
 FONT_LARGE = 48
 
 # SOUND
-BOUNCE_SOUND = "batter/assets/sounds/boing.wav"
-WELCOME_SOUND = "batter/assets/sounds/start.wav"
-OVER_SOUND = "batter/assets/sounds/over.wav"
+ASSETS_SOUND = "pingPong/assets/sounds"
+BOUNCE_SOUND = "pingPong/assets/sounds/game_boing.wav"
+OVER_SOUND = "pingPong/assets/sounds/game_points.wav"
+WELCOME_SOUND = "pingPong/assets/sounds/game_start.wav"
+INIT_SOUND = "pingPong/assets/sounds/game_init.wav"
+
 
 # TEXT
 ALIGN_CENTER = 0
@@ -41,9 +45,8 @@ WHITE = Color(255, 255, 255)
 PURPLE = Color(255, 0, 255)
 
 # KEYS
-LEFT = "left"
-RIGHT = "right"
-SPACE = "space"
+LEFT = "up"
+RIGHT = "down"
 ENTER = "enter"
 PAUSE = "p"
 
@@ -54,13 +57,10 @@ NEXT_LEVEL = 2
 IN_PLAY = 3
 GAME_OVER = 4
 
-# LEVELS
-LEVEL_FILE = "batter/assets/data/level-{:03}.txt"
-BASE_LEVELS = 5
 
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 # SCRIPTING CONSTANTS
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 
 # PHASES
 INITIALIZE = 0
@@ -71,55 +71,55 @@ OUTPUT = 4
 UNLOAD = 5
 RELEASE = 6
 
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 # CASTING CONSTANTS
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 
 # STATS
 STATS_GROUP = "stats"
-DEFAULT_LIVES = 3
-MAXIMUM_LIVES = 5
+
 
 # HUD
 HUD_MARGIN = 15
-LEVEL_GROUP = "level"
-LIVES_GROUP = "lives"
 SCORE_GROUP = "score"
-LEVEL_FORMAT = "LEVEL: {}"
-LIVES_FORMAT = "LIVES: {}"
 SCORE_FORMAT = "SCORE: {}"
+SCORE_A_POSITION = Point(80, HUD_MARGIN)
+SCORE_B_POSITION = Point(SCREEN_WIDTH - 100, HUD_MARGIN)
 
 # BALL
 BALL_GROUP = "balls"
-BALL_IMAGE = "batter/assets/images/000.png"
+BALL_IMAGE = "pingPong/assets/images/000.png"
 BALL_WIDTH = 28
 BALL_HEIGHT = 28
 BALL_VELOCITY = 6
 
 # RACKET
 RACKET_GROUP = "rackets"
-RACKET_IMAGES = [f"batter/assets/images/{n:03}.png" for n in range(100, 103)]
-RACKET_WIDTH = 106
-RACKET_HEIGHT = 28
+RACKET_IMAGES = [f"pingPong/assets/images/{n:03}.png" for n in range(110, 113)]
+RACKET_WIDTH = 25
+RACKET_HEIGHT = 200
 RACKET_RATE = 6
 RACKET_VELOCITY = 7
 
-# BRICK
-BRICK_GROUP = "bricks"
-BRICK_IMAGES = {
-    "b": [f"batter/assets/images/{i:03}.png" for i in range(10,19)],
-    "g": [f"batter/assets/images/{i:03}.png" for i in range(20,29)],
-    "p": [f"batter/assets/images/{i:03}.png" for i in range(30,39)],
-    "y": [f"batter/assets/images/{i:03}.png" for i in range(40,49)]
-}
-BRICK_WIDTH = 80
-BRICK_HEIGHT = 28
-BRICK_DELAY = 0.5
-BRICK_RATE = 4
-BRICK_POINTS = 50
 
 # DIALOG
 DIALOG_GROUP = "dialogs"
 ENTER_TO_START = "PRESS ENTER TO START"
 PREP_TO_LAUNCH = "PREPARING TO LAUNCH"
 WAS_GOOD_GAME = "GAME OVER"
+WINNER_GAME = "Winner Chicken Dinner {}"
+
+PLAYER_A_IDX = 0
+PLAYER_B_IDX = 1
+
+PLAYER_A_NAME = "PLAYER A"
+PLAYER_B_NAME = "PLAYER B"
+
+PLAYER_A_KEY_UP = 'w'
+PLAYER_A_KEY_DOWN = 's'
+
+PLAYER_B_KEY_UP = 'i'
+PLAYER_B_KEY_DOWN = 'k'
+
+PLAYER_DEFAULT_POINTS = 1
+GAME_MAX_SCORE = 10

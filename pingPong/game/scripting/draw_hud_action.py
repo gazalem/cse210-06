@@ -6,20 +6,23 @@ class DrawHudAction(Action):
 
     def __init__(self, video_service):
         self._video_service = video_service
-        
+
     def execute(self, cast, script, callback):
-        stats = cast.get_first_actor(STATS_GROUP)
-        self._draw_label(cast, LEVEL_GROUP, LEVEL_FORMAT, stats.get_level())
-        self._draw_label(cast, LIVES_GROUP, LIVES_FORMAT, stats.get_lives())
-        self._draw_label(cast, SCORE_GROUP, SCORE_FORMAT, stats.get_score())
+        stats = cast.get_entities(STATS_GROUP)
+        stat_count = 0
+        for stat in stats:
+            self._draw_label(cast, SCORE_GROUP, stat_count,
+                             SCORE_FORMAT, stat.get_score())
+            stat_count += 1
 
     # **********************************************************************************************
     # You found the bug. Great job!
     # **********************************************************************************************
     # todo: fix the bug by making sure the text value is set to the appropriate variable.
-    def _draw_label(self, cast, group, format_str, data):
+
+    def _draw_label(self, cast, group, object_idx, format_str, data):
         the_value_to_display = format_str.format(data)
-        label = cast.get_first_actor(group)
+        label = cast.get_entity_by_idx(group, object_idx)
         text = label.get_text()
         text.set_value(the_value_to_display)
         position = label.get_position()

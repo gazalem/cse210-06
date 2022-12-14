@@ -6,12 +6,21 @@ class ControlRacketAction(Action):
 
     def __init__(self, keyboard_service):
         self._keyboard_service = keyboard_service
-        
+
     def execute(self, cast, script, callback):
-        racket = cast.get_first_actor(RACKET_GROUP)
-        if self._keyboard_service.is_key_down(LEFT): 
-            racket.swing_left()
-        elif self._keyboard_service.is_key_down(RIGHT): 
-            racket.swing_right()  
-        else: 
-            racket.stop_moving()        
+        racket_a = cast.get_entity_by_idx(RACKET_GROUP, PLAYER_A_IDX)
+        racket_b = cast.get_entity_by_idx(RACKET_GROUP, PLAYER_B_IDX)
+
+        if self._keyboard_service.is_key_down(PLAYER_A_KEY_UP):
+            racket_a.swing_up()
+        elif self._keyboard_service.is_key_down(PLAYER_A_KEY_DOWN):
+            racket_a.swing_down()
+        else:
+            racket_a.stop_moving()
+
+        if self._keyboard_service.is_key_down(PLAYER_B_KEY_UP):
+            racket_b.swing_up()
+        elif self._keyboard_service.is_key_down(PLAYER_B_KEY_DOWN):
+            racket_b.swing_down()
+        else:
+            racket_b.stop_moving()

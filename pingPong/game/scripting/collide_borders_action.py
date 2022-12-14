@@ -18,24 +18,30 @@ class CollideBordersAction(Action):
         bounce_sound = Sound(BOUNCE_SOUND)
         over_sound = Sound(OVER_SOUND)
                 
-        if x < FIELD_LEFT:
-            ball.bounce_x()
-            self._audio_service.play_sound(bounce_sound)
+        if x < (FIELD_LEFT + BALL_WIDTH):
+            stat_b = cast.get_entity_by_idx(STATS_GROUP, PLAYER_B_IDX)
+            stat_b.add_points(PLAYER_DEFAULT_POINTS)
+            if stat_b.get_score() >= GAME_MAX_SCORE:
+                stat_b.set_is_winner(True)
+                callback.on_next(GAME_OVER)
+                self._audio_service.play_sound(over_sound)
+            else:
+                callback.on_next(TRY_AGAIN)
 
         elif x >= (FIELD_RIGHT - BALL_WIDTH):
-            ball.bounce_x()
-            self._audio_service.play_sound(bounce_sound)
+            stat_a = cast.get_entity_by_idx(STATS_GROUP, PLAYER_A_IDX)
+            stat_a.add_points(PLAYER_DEFAULT_POINTS)
+            if stat_a.get_score() >= GAME_MAX_SCORE:
+                stat_a.set_is_winner(True)
+                callback.on_next(GAME_OVER)
+                self._audio_service.play_sound(over_sound)
+            else:
+                callback.on_next(TRY_AGAIN)
 
-        if y < FIELD_TOP:
+        if y < (FIELD_TOP + (BALL_HEIGHT/2)):
             ball.bounce_y()
             self._audio_service.play_sound(bounce_sound)
 
-        elif y >= (FIELD_BOTTOM - BALL_WIDTH):
-            stats = cast.get_first_actor(STATS_GROUP)
-            stats.lose_life()
-            
-            if stats.get_lives() > 0:
-                callback.on_next(TRY_AGAIN) 
-            else:
-                callback.on_next(GAME_OVER)
-                self._audio_service.play_sound(over_sound)
+        elif y >= (FIELD_BOTTOM - (BALL_HEIGHT/2)):
+            ball.bounce_y()
+            self._audio_service.play_sound(bounce_sound)

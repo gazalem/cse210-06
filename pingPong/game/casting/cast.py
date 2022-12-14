@@ -69,6 +69,21 @@ class Cast:
             result = self._actors[group][0]
         return result
 
+
+    def get_actors_idx(self, group, idx):
+        """Gets the first entity in the given group.
+        
+        Args:
+            group: A string containing the name of the group.
+            
+        Returns:
+            An instance of entity.
+        """
+        result = None
+        if group in self._actors.keys():
+            result = self._actors[group][idx]
+        return result
+
     def remove_actor(self, group, actor):
         """Removes an actor from the given group.
         
